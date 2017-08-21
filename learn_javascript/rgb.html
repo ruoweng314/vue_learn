@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="../image/title.ico" type="image/x-icon"/>  
+	 <script src="../js/jquery.min.js" type="text/javascript"></script>
+	 <script src="../js/angular/angular.min.js" type="text/javascript"></script>
+	  <script src="../js/vue/vue.js" type="text/javascript"></script>
+	<title>16进制转rgb</title>
+</head>
+<body>
+<div id="rgb_16">
+	<input type="text" v-model="color_16">
+	<button type="button" v-on:click="changeColor">点击看看</button>
+	<p>{{color_rgb}}</p>
+	<div v-bind:style="{color:color_16}" style="width:300px;height:300px;">
+		16进制的，看看颜色改变了吗？
+	</div>	
+	<div v-bind:style="{color:color_rgb}" style="width:300px;height:300px;">
+		rgb进制的，看看颜色改变了吗？
+	</div>
+</div>
+	
+</body>
+<script type="text/javascript">
+	var app = new Vue({
+		el:"#rgb_16",
+		data:{
+			color_16:'#00ff00',
+			color_rgb:'',
+		},
+		methods:{
+			changeColor:function(){
+				//检查是否是 16进制的颜色
+				
+				if(! /^#[0-9a-fA-F]{3,6}$/.test(this.color_16)){
+					alert("请输入正确的颜色");
+					return;
+				}
+
+				this.color_rgb="rgb(";
+
+
+				switch(this.color_16.length){
+					case 4 : this.color_16 = this.color_16+"000";
+						break;
+					case 5 : this.color_16 = this.color_16+"00"; 
+						break;
+					case 6 : this.color_16 = this.color_16+"0"; 
+						break;
+					case 7 : 
+						break;
+				}
+
+				console.log(this.color_16);
+				console.log(this.color_16.substr(5,2));
+				this.color_rgb =  this.color_rgb+parseInt(this.color_16.substr(1,2),16)+","+parseInt(this.color_16.substr(3,2),16)+","+parseInt(this.color_16.substr(5,2),16)+")";
+
+			}
+		}
+	});
+</script>
+</html>

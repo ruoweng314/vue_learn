@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="../image/title.ico" type="image/x-icon"/>  
+	 <script src="../js/jquery.min.js" type="text/javascript"></script>
+	 <script src="../js/d3/d3.min.js" type="text/javascript"></script>
+	 <script src="../js/vue/vue.js" type="text/javascript"></script>
+	<title>learn hello vue</title>
+</head>
+<style >
+	.app{
+		margin-top:20px;
+		margin-bottom:20px;
+	}
+</style>
+<body>
+	<div id="app">
+		{{message}}
+	</div>
+	<hr>
+	<div class="app" id="app-2">
+		<span v-bind:title='message'>
+			鼠标悬停几秒查看动态绑定提示
+		</span> 
+	</div>
+	<hr>
+	<div class="app" id="app-3">
+		<p v-if='allow_show'>now you can read me!</p>
+	</div>
+	<hr>
+	<div class="app" id="app-4">
+		<ul>
+			<li v-for = "item in items">{{item | capitalize}}</li>
+		</ul>
+	</div>
+	<hr>
+	<div class="app" id="app-5">
+		<p>{{message}}</p>
+		<button type="button" v-on:click="reverseMessage" >click me</button>
+	</div>
+
+	<hr>
+
+	<div class="app" id="app-6">
+		<p>{{message}}</p>
+		<input type="text" v-model="message">
+	</div>
+
+	<hr>
+	<div class="app" id="app-7">
+		<ol>
+			<todo-item v-for="item in itemList"
+						v-bind:todo="item"
+						v-bind:key='item.id'
+			>
+				
+			</todo-item>
+		</ol>
+	</div>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:"#app",
+			data:{
+				message:'Hello world vue '
+			}
+		});
+
+		var app2 = new Vue({
+			el:"#app-2",
+			data:{
+				message:"hello 现在时间是："+new Date()
+			}
+		});
+
+		var app3 = new Vue({
+			el:'#app-3',
+			data:{
+				allow_show:true
+			}
+		});
+
+		var app4 = new Vue({
+			el:"#app-4",
+			data:{
+				items:[{name:'houjie',age:12},
+						{name:'nvhaier',age:22},
+						{name:'yatou',age:33}
+				]
+			},
+			filters:{
+				capitalize:function(item){
+					
+					return item.age>20 ? item.name : 'sorry age little';
+				}
+			}
+		});
+
+		var app5 = new Vue({
+			el:'#app-5',
+			data:{
+				message:'请 点 击下 方按钮！'
+			},
+			methods:{
+				reverseMessage:function(){
+					this.message = this.message.split('').reverse().join('');
+				}
+			}
+		});
+
+		var app6 = new Vue({
+			el:'#app-6',
+			data:{
+				message:'hello vue.js'
+			}
+		});
+
+
+		Vue.component('todo-item',{
+			props:['todo'],
+			template:'<li>{{todo.name }}</li>'
+		})
+
+		var app7 = new Vue({
+			el:'#app-7',
+			data:{
+				itemList:[
+					{id:1,name:'zhaoge',show:false},
+					{id:2,name:'houjie',show:false},
+					{id:3,name:'nvhaier',show:true}
+				]
+			},
+			
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="../image/title.ico" type="image/x-icon"/>
+	<script src="../js/jquery.min.js" type="text/javascript"></script>
+	 <script src="../js/d3/d3.min.js" type="text/javascript"></script>
+	 <script src="../js/vue/vue.js" type="text/javascript"></script>
+	 <link href="https://unpkg.com/animate.css@3.5.1/animate.min.css" rel="stylesheet" type="text/css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+	<script src="https://unpkg.com/tween.js@16.3.4"></script>
+	<title>Document</title>
+</head>
+<body>
+	<div id="animated-number-demo">
+		<input v-model.number="number" type="number" step="20">
+		<p>{{animateNumber}}</p>
+	</div>
+
+	<script>
+		new Vue({
+			el:"#animated-number-demo",
+			data:{
+				number:0,
+				animatedNumber:0
+			},
+			watch:{
+				number:function(newValue,oldValue){
+					var vm = this;
+					function animate(){
+						if(TWEEN.update()){
+							requestAnimationFrame(animate);
+						}
+					}
+					new TWEEN.Tween({tweeningNumber:oldValue})
+							.easing(TWEEN.Easing.Quadratic.Out)
+							.to({tweeningNumber: newValue},1000)
+							.onUpdate(function(){
+								vm.animatedNumber = this.tweeningNumber.toFixed(0)
+							})
+							.start()
+
+					animate()
+				}
+			}
+		});
+	</script>
+</body>
+</html>
