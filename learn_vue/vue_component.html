@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="../image/title.ico" type="image/x-icon"/>
+	<script src="../js/jquery.min.js" type="text/javascript"></script>
+	 <script src="../js/d3/d3.min.js" type="text/javascript"></script>
+	 <script src="../js/vue/vue.js" type="text/javascript"></script>
+	 <script src="https://cdn.rawgit.com/chrisvfritz/5f0a639590d6e648933416f90ba7ae4e/raw/974aa47f8f9c5361c5233bd56be37db8ed765a09/currency-validator.js"></script>
+	<title>component</title>
+</head>
+<style>
+	p{
+		color:green;
+	}
+</style>
+<body>
+	<div id="example">
+		<my-component></my-component>
+	</div>
+
+	<hr>
+	<p> 组件 中的data 必须是 函数，使用的过程中最好在函数中 使用return
+	返回，可避免渲染使用统一对象，相互干扰</p>
+	<div id="example-2">
+		<simple-counter></simple-counter>
+		<simple-counter></simple-counter>
+		<simple-counter></simple-counter>
+	</div>
+
+	<hr>
+	<p>props 子组件获取父组建的对象</p>
+	<p>
+	必须使用v-bind 才可以绑定对象 ，这是一个js语句 ，而不使用v-bind只可以绑定字符串，
+	传入{name:'houjie',age:123}  ，将不可以通过 message.name获取那么对象的值
+	而通过v-bind可以  通过message.name获取对象的值
+	</p>
+	<div id="example-3">
+		<child v-bind:message_1 = message></child>
+	</div>
+
+
+	<hr>
+	<p>可以发现，组件内部是自己算自己的和父级没有关系</p>
+	<p>
+		1.$emit(eventName) 触发事件  <br>
+		2.父组件在子组件上，使用 v-on 来监听子组件触发的事件。
+	</p>
+	<div id="counter-event-example">
+		<p>{{total}}</p>
+		<button-counter v-on:increment="incrementTotal"></button-counter>	
+		<button-counter v-on:increment="incrementTotal"></button-counter>
+	</div>
+
+<hr>
+<p>货币计算机</p>
+	<div id="component-format-example">
+		<currency-input 
+		label="Price"
+		v-model="price"
+		></currency-input>
+		<currency-input
+		label="Shipping"
+		v-model="Shipping"
+		></currency-input>
+		<currency-input
+		label="Handling"
+		v-model="Handling"
+		></currency-input>
+		<currency-input
+		label="Discount"
+		v-model="Discount"
+		></currency-input>
+
+		<p>Total:${{total}}</p>
+	</div>
+	<script>
+		var vm = new Vue({
+			el:"#example",
+			components:{
+				'my-component':{template:'<div>hello  test</div>'}
+			}
+		});
+
+
+		Vue.component('simple-counter',{
+			template:'<button v-on:click="counter += 1">{{ counter }}</button>',
+			data:function(){
+				return {
+					counter:0
+				}
+			}
+		});
+
+		new Vue({
+			el:'#example-2'
+		});
+
+		Vue.component('child',{
+			props:['message_1'],
+			template:'<span>{{message_1}} ={{message_1.name}}  +  {{message_1.age}}</span>'
+		})
+
+
+		new Vue({
+			el:'#example-3',
+			data:{
+				message:{name:'houjie',age:123}
+			}
+		})
+
+
+		Vue.component('button-counter',{
+			template:'<button v-on:click="increment">{{counter}}</button>',
+			data:function(){
+				return{
+					counter: 0 
+				}
+			},
+			methods:{
+				increment:function(){
+					this.counter += 1
+					this.$emit('increment')
+				}
+			}	
+		})
+
+
+		new Vue({
+			el:"#counter-event-example",
+			data:{
+				total:0
+			},
+			methods:{
+				incrementTotal:function(){
+					this.total +=1
+				}
+			}
+		})
+
+
+		Vue.component('currency-input',{
+			template:'\
+					<div>\
+					<label v-if="label">{{label}}</label>\
+					$\
+					<input ref="input"\
+					v-bind:value="value"\
+					v-on:input="updateValue($event.target.value)"\
+					v-on:focus="selectAll"\
+					v-on:blur="formatValue"\
+					>\
+					</div>\
+			',
+			props:{
+				value:{
+					type:Number,
+					default:0
+				},
+				label:{
+					tyoe:String,
+					default:''
+				}
+			},
+			mounted:function(){
+				this.formatValue()
+			},
+			methods:{
+				updateValue:function(value){
+					var result = currencyValidator.parse(value,this.value)
+					if(result.warning){
+						this.$refs.input.value = result.value					
+					}
+						this.$emit('input',result.value)
+				},
+				formatValue:function(){
+					this.$refs.input.value = currencyValidator.format(this.value)
+				},
+				selectAll:function(event){
+					setTimeout(function(){
+						event.target.select()
+					},0)
+				}
+			}
+		})
+
+
+		new  Vue({
+			el:"#component-format-example",
+			data:{
+				price:0,
+				shipping:0,
+				handling:0,
+				discount:0
+			},
+			computed:{
+				tltal:function(){
+					return((
+						this.price*100+
+						this.shipping *100+
+						this.handling *100 -
+						this.discount*100
+						)/100).toFixed(2)
+				}
+			}
+		})
+
+	</script>
+</body>
+</html>

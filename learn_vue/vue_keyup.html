@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="../image/title.ico" type="image/x-icon"/>
+	<script src="../js/jquery.min.js" type="text/javascript"></script>
+	 <script src="../js/d3/d3.min.js" type="text/javascript"></script>
+	 <script src="../js/vue/vue.js" type="text/javascript"></script>
+	<title>vue key</title>
+</head>
+<style>
+	.static{
+		width:100%;
+		height:200px;
+		border:1px solid #f7f7f7;
+	}
+	.active{
+		background: red;
+	}
+	.text-danger{
+		background:green;
+	}
+</style>
+<body>
+	<div id="app">
+		<input type="text" v-on:keyup.13="submit('回车看看')">回车看看
+		<hr>
+		<input type="text" v-on:keyup.enter="submit('回车看看')">回车看看
+		<hr>
+		<input type="text" v-on:keyup.tab="submit('tab看看')">tab看看,测试发现tab没有办法键值监听
+		<hr>
+		<input type="text" v-on:keyup.delete="submit('delete看看')">delete看看
+		<hr>
+		<input type="text" v-on:keyup.esc="submit('esc看看')">esc看看
+		<hr>
+		<input type="text" v-on:keyup.space="submit('space看看')">space看看
+		<hr>
+		<input type="text" v-on:keyup.up="submit('up看看')">up看看
+		<hr>
+		<input type="text" v-on:keyup.down="submit('down看看')">down看看
+		<hr>
+		<input type="text" v-on:keyup.left="submit('left看看')">left看看
+		<hr>
+		<input type="text" v-on:keyup.right="submit('right看看')">right看看
+
+	</div>
+	
+	
+	<script>
+		var vm = new Vue({
+			el:'#app',
+			methods:{
+				submit:function(message){
+				console.log(message);
+				}
+			}
+		});
+	</script>
+</body>
+</html>

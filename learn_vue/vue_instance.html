@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="../image/title.ico" type="image/x-icon"/>  
+	 <script src="../js/jquery.min.js" type="text/javascript"></script>
+	 <script src="../js/d3/d3.min.js" type="text/javascript"></script>
+	 <script src="../js/vue/vue.js" type="text/javascript"></script>
+	<title>vue Instance</title>
+</head>
+<body>
+	
+	hello  please  console..........
+	
+	<div id="example">
+		
+	</div>
+	<script>
+		var data = {a:1};
+		var vm = new Vue({
+			el:'#example',
+			data:data
+		});
+
+		var a;
+		console.log(a === data.a);
+
+		vm.a = 2;
+		console.log(data.a);
+
+		data.a = 3;
+		console.log(vm.a);
+
+
+	</script>
+</body>
+</html>

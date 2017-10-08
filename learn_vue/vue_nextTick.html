@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="../image/title.ico" type="image/x-icon"/>
+	<script src="../js/jquery.min.js" type="text/javascript"></script>
+	 <script src="../js/d3/d3.min.js" type="text/javascript"></script>
+	 <script src="../js/vue/vue.js" type="text/javascript"></script>
+	<title>nextTick</title>
+</head>
+<body>
+
+
+	<p>数据变化后使用 nextTick()函数，捕获dom节点的改变。
+		<br>
+		相当于一个异步监听函数，dom节点改变而触发效果
+	</p>
+	<p>一般推荐在组建内部使用nextTicjk（）这样this直接自动绑定上当前Vue实例</p>
+	<div id="example">{{message}}</div>
+
+	<script>
+		var vm = new Vue({
+			el:"#example",
+			data:{
+				message:'123'
+			}
+		})
+		vm.message = 'new message'
+		vm.$el.textContent === 'new message'
+		Vue.nextTick(function(){
+			vm.$el.textContent === 'new message'
+		})
+	</script>
+</body>
+</html>

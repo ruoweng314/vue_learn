@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="../image/title.ico" type="image/x-icon"/>
+	<script src="../js/jquery.min.js" type="text/javascript"></script>
+	 <script src="../js/d3/d3.min.js" type="text/javascript"></script>
+	 <script src="../js/vue/vue.js" type="text/javascript"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
+	<title>vue watcher example</title>
+</head>
+<body>
+	<div id="watch-example">
+		<p>
+			Ask a yes/no question:
+			<input type="text" v-model="question">
+		</p>
+		<p>{{answer}}</p>
+	</div>
+
+	<script>
+		var warchExample = new Vue({
+			el:"#watch-example",
+			data:{
+				question:'',
+				answer:"sorry I connot give you an answer until you ask a question"
+			},
+			watch:{
+				question:function(newQuestion){
+					this.answer = "Waiting for you to stop typing",
+					this.getAnswer()
+				}
+			},
+			methods:{
+				getAnswer: _.debounce(
+					function(){
+						if(this.question.indexOf('?') === -1){
+							this.answer = "Question usually contain a question mark.:-"
+							return
+						}
+						this.answer = "Thinking..";
+						var vm = this;
+						axios.get("https://yesno.wtf/api")
+						.then(function(response){
+							vm.answer = _.capitalize(response.data.answer)
+						})
+						.catch(function(error){
+							vm.answer = "ERROR! Could not reach the ApI."+ error
+						})
+
+					},
+					500
+					)
+			}
+		});
+	</script>
+</body>
+</html>
