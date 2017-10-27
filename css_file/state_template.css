@@ -1,0 +1,55 @@
+.north{
+	position: absolute;
+	top:0;
+	height:100px;
+	width:100%;
+	padding-top:30px;
+	padding-left:100px;
+
+}
+
+.sourth{
+	position:absolute;
+	top:120px;
+	height:300px;
+	width:100%;
+	padding-left:100px;
+}
+
+
+
+.circle{
+	width:16px;
+	height:16px;
+	border-radius: 50%;
+	float:left;
+	background-color: #f7f7f7;
+	border-color: #D18BCB;
+}
+
+.oblong{
+	width:25px;
+	height:8px;
+	margin-top:5px;
+	border-radius: 3px;
+	float:left;
+	background-color: #f7f7f7;
+	border-color: #D18BCB;
+}
+
+.green{
+	background-color: green;
+}
+
+.yellow{
+	background-color: yellow;
+
+}
+
+.red{
+	background-color: red;
+}
+
+.blue{
+	background-color: blue;
+}

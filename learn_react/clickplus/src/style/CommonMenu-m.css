@@ -1,0 +1,31 @@
+.clickplusTop{
+		position:absolute;
+		top:0;
+		width:100%;
+		height:70px;
+		background:#008CED;
+	}
+
+ul{
+		color:#ffffff;
+		list-style-type:none
+		
+
+	}
+
+li{
+		width:100px;
+		height:55px;
+		float:left;
+		list-style:none
+	}
+
+link{
+	 text-decoration: none;
+}
+.ClickplusContent{
+	width:100%;
+	height:auto;
+	padding:10px;
+	margin-top:70px;
+}

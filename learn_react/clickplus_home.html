@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>clickplus home</title>
+    <link rel="icon" href="../image/title.ico" type="image/x-icon"/>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+	<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="../js/jquery.min.js" type="text/javascript"></script>
+  </head>
+  	<style>
+  		.menu-top{
+  			position:absolute;
+  			top:0;
+  			width:100%;
+  			height:70px;
+  			background:#008CED;
+
+
+  		}
+
+  		ul{
+	  			color:#ffffff;
+					list-style-type:none
+	  			
+	  		}
+  		li{
+  				width:100px;
+  				height:55px;
+  				float:left;
+  				list-style:none
+  			}
+  		.learn-note{
+  			position: relative;
+  			width:100%;
+  			height:auto;
+  			border:1px solid #D2DAE2;
+  			margin-top:70px;
+  			padding:10px;
+  		}
+  		
+  	</style>
+  <body style="margin:0;">
+    <div id="root" ></div>
+    <script type="text/babel">
+		var Pagenation = React.createClass({
+			getInitialState: function() {
+	          return {
+	            amountData: {name:'许阳阳',age:'学习笔记','email':'clickplus@clickplus.cn'}
+	          };
+	        },
+			render: function(){
+				return (
+					<div>
+						<ClickplusMenu />
+						<North amount = {this.state.amountData} />
+					</div>
+				);
+			}
+		});
+
+		var North = React.createClass({
+		  render: function() {
+		    return (
+		    	<div className="learn-note">
+		    		 <h3>{this.props.amount.name},{this.props.amount.age},{this.props.amount.email} </h3>
+		    		 <pre>
+		    		 	1.state使用在本作用域中，而props使用在子集从父级获取的对象中。
+		    		 	2.一个js中貌似只有一个 React.render()方法。目前使用两个React.render来添加两个组件是不行的，只能将子组件嵌入父组件，统一render父组件来渲染页面
+		    		 </pre>
+		    	</div>
+		     
+		    );
+		  }
+		});
+
+		var ClickplusMenu = React.createClass({
+			render: function(){
+				return (
+					<div className="menu-top">
+						<ul>
+							<li>首页</li>
+							<li>页面管理</li>
+							<li>数据运营</li>
+							<li>智能运营</li>
+						</ul>
+					</div>
+				)
+			}
+		});
+      	ReactDOM.render(
+        	<Pagenation />,
+        	document.getElementById('root')
+      	);
+
+    </script>
+  </body>
+</html>
