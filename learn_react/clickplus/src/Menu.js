@@ -8,18 +8,19 @@ import{
 import HomeClickplus  from './HomeClickplus';
 import PageClickplus  from './PageClickplus';
 import DataClickplus  from './DataClickplus';
-import MenuClass from './style/CommonMenu-m.css';
+import MenuClass from './style/ClickplusMenu.less';
 
 export default class MenuTop extends React.Component{
   render(){
     return (
         <Router>
           <div>
-            <div  className={MenuClass.clickplusTop}>
-            <ul>
-              <li><Link to="/">首页</Link></li>
-              <li><Link to="/pageList">页面管理</Link></li>
-              <li><Link to="/dataList">数据运营</Link></li>
+            <div  className={MenuClass.clickplus_top}>
+            <div className={MenuClass.clickpluslogo}> <img src={require('./style/img/logo.png')}/></div>
+            <ul className={MenuClass.clickplus_menu_ul}>
+              <li><Link to="/" style={{"color":"#ffffff","textDecoration": "none"}}>首页</Link></li>
+              <li><Link to="/pageList" style={{"color":"#ffffff","textDecoration": "none"}}>页面管理</Link></li>
+              <li><Link to="/dataList" style={{"color":"#ffffff","textDecoration": "none"}}>数据运营</Link></li>
             </ul>
             </div>
             <Route exact path="/" component={HomeClickplus}/>

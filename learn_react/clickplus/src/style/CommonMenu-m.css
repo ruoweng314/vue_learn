@@ -6,6 +6,13 @@
 		background:#008CED;
 	}
 
+/* .logo{
+		width:150px;
+		height:65px;
+		float:left;
+		background-image: url(../public/images/logo.png) no-repeat left center ;
+		background-size:100%;
+	} */
 ul{
 		color:#ffffff;
 		list-style-type:none
