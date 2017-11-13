@@ -9,7 +9,7 @@ import Tooltip from 'react-bootstrap/lib/Tooltip';
 import FormGroup from 'react-bootstrap/lib/Form';
 import Select from 'react-select';
 import LineChart from './LineChart';
-
+import PredefinedRanges from './PredefinedRanges';
 
 import LayoutClass from './style/HomeLayout.less';
 import { DatePicker } from 'antd';
@@ -88,7 +88,7 @@ export default class HomeLayout extends React.Component{
         <div className={LayoutClass.layout}>
           <div className={LayoutClass.title}>
             <span className={LayoutClass.title_name}>数据概览</span>
-            <DatePicker/>
+            <PredefinedRanges/>
             <Button bsSize="xsmall" id="control_amount_button" type="button" className={LayoutClass.controller_button} onClick={this.controlHide} >{this.state.button_name}</Button>
           </div>
           <div className={LayoutClass.content} id="home_amount_content">

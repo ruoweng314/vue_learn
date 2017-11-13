@@ -15,7 +15,7 @@ body{
 		width:500px;
 		margin-left:180px;
 		li{
-			width: 110px;
+			width: 120px;
 		    height: 86px;
 		    float: left;
 		    font-size:16px;
@@ -27,6 +27,46 @@ body{
 		    a{
 		    	color:#ffffff;
 		    	text-decoration:none;
+		    	height:50px;
+		    }
+
+		    &:hover > ul{
+		     	display:block;
+		    }
+		    ul{
+		    	display:none;
+		    	background-color:#FFFFFF;
+		    	height:auto;
+		    	box-shadow: 0 1px 1px rgba(0,0,0,.2);
+		    	position: absolute;
+			    margin-top: 27px;
+			    width: 120px;
+			    z-index: 999;
+		    	
+		    	li{
+		    	background:#FFFFFF;
+		    	color:#000000;
+		    	height:40px;
+		    	line-height:40px;
+		    	padding-top:0px;
+		    	margin-top:0px;
+		    	border-left: none;
+		    	border-bottom: 1px solid #E2E9EC;
+
+		    	
+		    	&:hover {
+		    	background:#EBF8FF;
+		    	border-left: 3px solid #0080E3;
+		    	}
+
+		    	a{
+			    	color:#738095;
+			    	height:40px;
+			    	line-height:35px;
+			    	font-size:14px;
+		    	}
+		    	}
+		    	
 		    }
 		}
 	}		

@@ -7,7 +7,7 @@ export default class LineChart extends React.Component{
     super(props);
     this.getOption = () => {
     const option ={
-        title:{ text: '数据值从组件外部导入',
+        title:{ text: this.props.chartData.title,
                 x: 'center',
                 align: 'center'
         },
