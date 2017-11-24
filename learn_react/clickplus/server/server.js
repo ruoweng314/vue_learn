@@ -1,33 +1,9 @@
 var express = require('express');
 var app = express();
-var proxy = require('http-proxy-middleware');
-//var httpProxy = require('http-proxy');
-const request = require('request');
 var config = require('../config/index.js');
-//var url = require('url');
-//var proxy = httpProxy.createProxyServer({
-//   target:'http://camptest.clickplus.cn:80'
-// });
+
 app.use('/',require('connect-history-api-fallback')());  //把public目录下的index.html作为所有不存在的路径的请求的响应返回给浏览器。
 app.use('/',express.static(config.staticPath));
-
- app.use('/users',proxy({
-        target:'http://camptest.clickplus.cn',
-        changeOrigin:true
-      }));
-
-// function remoteRequest(req,res){
-//   var pathname = url.parse(req.url).pathname;
-//   console.log(pathname);
-//    if(pathname.indexOf("ajax") > 0){
-//       console.log("执行了");
-     
-//       proxy.web(req,res);
-//   }
-// }
-
-
-
 
 
 if(process.env.NODE_ENV !== 'production'){
@@ -46,14 +22,12 @@ if(process.env.NODE_ENV !== 'production'){
     }
   }));
 
-
   //热更新配置,用于处理修改代码，立即刷新
   var webpackHotMiddleware = require('webpack-hot-middleware');
   app.use(webpackHotMiddleware(webpackCompiled));
 }
 
 var server = app.listen(2000,function(){
- // app.get('/*',remoteRequest);
   var port = server.address().port;
   console.log('open http://localhost:%s',port);
 });
