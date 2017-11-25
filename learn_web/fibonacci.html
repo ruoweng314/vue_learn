@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>fobonacci</title>
+	 <script src="../js/jquery.min.js" type="text/javascript"></script>
+	 <script src="../js/vue/vue.js" type="text/javascript"></script>
+</head>
+<body>
+	<p>裴波那切数列练习</p>
+	<div id="myapp">
+		
+	<p>请输入您要查看的位数：</p>
+	<input type="number" v-model="input_value" v-on:keyup.enter="getFibonacci(input_value)">
+	结果为：<input type="text" v-model="output_value">
+	</div>
+
+
+	<script>
+
+		const fibonacci  = function(n) {
+						let fibonacci_cache = [0,1,1];
+						if(n<=2){
+							return fibonacci_cache[n];
+						}
+						if(fibonacci_cache[n-2] === undefined){
+							fibonacci_cache[n-2] = fibonacci(n-2);
+						}
+						if(fibonacci_cache[n-1] === undefined){
+							fibonacci_cache[n-1] = fibonacci(n-1);
+						}
+
+						if(n >2){
+							fibonacci_cache[n] = fibonacci_cache[n-1] + fibonacci_cache[n-2];
+						}
+					
+					return fibonacci_cache[n];
+				};
+
+		var vm = new Vue({
+			el:"#myapp",
+			data:{
+				input_value:1,
+				output_value:1
+			},
+			methods:{
+				getFibonacci : function(n){
+					this.output_value =  fibonacci(n);
+					console.log(this.output_value)
+				}
+			}
+		})
+	</script>
+</body>
+</html>
