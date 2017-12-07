@@ -26,8 +26,8 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
-app/* 使用html模板，css样式和单元测试自定义（spec.ts）组件，是根组件，随应用的增长而成长。
-app/app.module.ts  定义APPModule,这个跟模块会告诉angular如何组装应用。
+app/* 使用html模板，css样式和单元测试自定义（spec.ts）组件，是根组件，随应用的增长而成长。 </br>
+app/app.module.ts  定义APPModule,这个跟模块会告诉angular如何组装应用。      
 assets/* 这个文件夹下可以放图片等任何东西，构建应用后，会全部拷贝到发布包中
 enviroments/* 文件下配置环境变量，这些文件在构建应用时被替换
 favicon.ico文件配置网站的图标。title中的小logo
